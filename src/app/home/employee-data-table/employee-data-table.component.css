@@ -3,7 +3,6 @@
     padding: 0 40px 0 10px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    margin-top: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -25,16 +24,20 @@
     background-color: rgb(255, 75, 75);
     cursor: pointer;
 }
+.turn-left-delete-arrow{
+    transform: translateY(5px);
+    margin-right: 10px;
+}
 
 table {
     border-spacing: 0px;
     width: 100%;
 }
 thead {
-    position: sticky;
+    /* position: sticky; */
     top: 0px;
     background-color: white;
-    z-index: 2;
+    /* z-index: 2; */
 }
 tr td, tr th {
     border-bottom: 3px solid rgb(219, 219, 219);
@@ -42,6 +45,7 @@ tr td, tr th {
 tr th {
     border-top: 3px solid rgb(219, 219, 219);
     white-space: nowrap;
+    cursor: pointer;
 }
 th {
     text-align: left;
@@ -61,9 +65,12 @@ th div>img{
 }
 
 /* Table rows */
-td {
+td{
     font-size: 12px;
     padding: 5px 0px 5px 10px;
+}
+tbody>tr:hover{
+    background-color: rgb(253, 244, 244);
 }
 input[type=checkbox]{
     accent-color: var(--col-gray);
@@ -98,4 +105,35 @@ input[type=checkbox]{
     background-color: rgb(248,215,218);
     /* color: rgb(142,47,56); */
     color: rgba(137,58,91);
+}
+
+.three-dots{
+    padding-right: 10px;
+    position: relative;
+}
+.three-dots img{
+    cursor: pointer;
+}
+.ellipsis{
+    position: absolute;
+    font-size: 14px;
+    transform: translateX(-100%);
+    top: 20px;
+    border: 2px solid var(--col-gray);
+    z-index: 1;
+}
+.ellipsis button{
+    background-color: white;
+    white-space: nowrap;
+    cursor: pointer;
+    padding: 5px 10px;
+    width: 100%;
+    border: none;
+}
+.ellipsis button:hover{
+    background-color: rgb(253, 244, 244);
+    /* background-color: rgb(223, 217, 217); */
+}
+.ellipsis button:not(:first-child){
+    border-top: 2px solid var(--col-gray);
 }

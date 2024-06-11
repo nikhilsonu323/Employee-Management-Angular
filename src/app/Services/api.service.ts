@@ -2,30 +2,63 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Employee } from '../Models/Employee';
 import { FilterContent } from '../Models/FilterContent';
+import { Role } from '../Models/Role';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) { 
-    console.log("http service ");
-    
-  }
-  private url = 'https://localhost:7167/api/Employees';
-  getData(){
+  constructor(private http: HttpClient) { }
+  private url = 'https://localhost:7260/api/Employees';
+  private rolesUrl = 'https://localhost:7260/api/Roles';
+  
+  getEmployees(){
     return this.http.get<Employee[]>(this.url);
   }
 
-  getFilteredData(filters: FilterData){
+  getEmployeeById(id: string){
+    return this.http.get<Employee | null>(this.url+'/'+id);
+  }
+
+  getFilteredEmployee(filters: FilterData){
     var filterData = {
       alphabets: Array.from(filters.alphabets),
-      status: Array.from(filters.dropdownFilters.status),
-      location: Array.from(filters.dropdownFilters.location),
-      department: Array.from(filters.dropdownFilters.departments)
+      statusIds: Array.from(filters.dropdownFilters.status),
+      locationIds: Array.from(filters.dropdownFilters.location),
+      departmentIds: Array.from(filters.dropdownFilters.departments)
     };
     return this.http.post<Employee[]>(this.url+'/filter', filterData);
   }
+
+  getEmployeesInRole(id: number){
+    return this.http.get<Employee[]>(this.url+'/role/'+id);
+  }
+
+  deleteEmployees(empNos: Set<string>){
+    return this.http.delete<string[]>(this.url,{body: Array.from(empNos)});
+  }
+
+  deleteEmployee(empNo: string){
+    return this.http.delete(this.url + '/'+ empNo);
+  }
+
+  getRoles(){
+    return this.http.get<Role[]>(this.rolesUrl);
+  }
+
+  getRolesWithEmployees(){
+    return this.http.get<Role[]>(this.rolesUrl+'/employees');
+  }
+  
+  getFilteredRoles(filters: FilterContent){
+    return this.http.post<Role[]>(this.rolesUrl+'/filter',
+      {
+        locationIds: Array.from(filters.location), 
+        departmentIds: Array.from(filters.departments)
+      });
+  }
+
 }
 
 interface FilterData{

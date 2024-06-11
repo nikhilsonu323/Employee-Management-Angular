@@ -11,15 +11,16 @@
             <img src="../../assets/images/Horizontal nav/Dashboard.svg" alt="lock">
             <span *ngIf="!isNavbarMinimized">Dashboard</span>
         </div>
-        <a class="nav-items flex-gap-1r" routerLink="/" [ngClass]="!isNavbarMinimized? '':'hide-side-redbar'" [routerLinkActive]="['active-route','light-red-theme']">
-            <img src="../../assets/images/Horizontal nav/Employees-red.svg" alt="lock">
+        <a class="nav-items flex-gap-1r" routerLink="employees" [ngClass]="!isNavbarMinimized? '':'hide-side-redbar'" [routerLinkActive]="['active-route','light-red-theme']" #emp>
+            <img [src]="emp.classList.contains('active-route')?'assets/images/Horizontal nav/Employees-red.svg':'../../assets/images/Horizontal nav/Employees.svg'" alt="lock">
+            <!-- <img src='../../assets/images/Horizontal nav/Employees.svg' alt="lock"> -->
             <span *ngIf="!isNavbarMinimized">Employees</span>
         </a>
 
         <div class="marg-top-bot col-grey padd-lr-15 f-14">{{isNavbarMinimized ? 'Role' :'ROLE/USER MANAGEMENT'}}</div>
-        <a class="nav-items flex-justify-sb" routerLink="/Roles" [routerLinkActive]="['active-route','light-red-theme']">
+        <a class="nav-items flex-justify-sb" routerLink="/roles" [routerLinkActive]="['active-route','light-red-theme']" #role>
             <div class="flex-gap-1r">
-                <img src="../../assets/images/Horizontal nav/Roles-black.svg" alt="lock">
+                <img [src]="role.classList.contains('active-route')?'assets/images/Horizontal nav/Roles.svg':'../../assets/images/Horizontal nav/Roles-black.svg'" alt="lock">
                 <span *ngIf="!isNavbarMinimized">Roles</span>
             </div>
             <div class="caret" *ngIf="!isNavbarMinimized"><img src="../../assets/images/svg/arrow_forward_ios.svg" alt=""></div>
@@ -42,3 +43,6 @@
         </div>
     </section>
 </nav>
+
+
+<i class="ph ph-caret-right"></i>

@@ -1,9 +1,10 @@
 .search-component{
-    position: sticky;
+    /* position: sticky; */
     top: 25px;
     z-index: 1;
     margin-top: 25px;
     background-color: white;
+    margin-bottom: 1rem;
 }
 .search-component{
     display: flex;

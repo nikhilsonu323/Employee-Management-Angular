@@ -75,6 +75,10 @@ nav{
     height: 2.4rem;
     background-color: var(--dark-red);
 }
+/* .active-route img{
+    filter: invert(36%) sepia(27%) saturate(7281%) hue-rotate(340deg) brightness(113%) contrast(92%);
+    filter: invert(18%) sepia(98%) saturate(7171%) hue-rotate(359deg) brightness(101%) contrast(114%);
+} */
 .light-red-theme{
     color: var(--dark-red) !important;
     background-color: var(--bg-red);

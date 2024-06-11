@@ -13,12 +13,19 @@ export class FilterService {
     dropdownFilters: FilterContent
   }> = new EventEmitter();
 
+  @Output() onExportClick: EventEmitter<null> = new EventEmitter();
+
   constructor() { }
 
   onFilterChange(data: FilterData){
     this.filters = data;
     this.filterChange.emit(this.filters);
   }
+
+  downloadData(){
+    this.onExportClick.emit();
+  }
+
 }
 
 interface FilterData{

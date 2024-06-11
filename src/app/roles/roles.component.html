@@ -1,0 +1,62 @@
+<div class="role-component">
+
+    <section class="description">
+        <div>
+            <div class="description-heading">Roles</div>
+            <div class="description-text">All the roles are configured here</div>
+        </div>
+        <a routerLink="add">
+            <button class="btn dark-red-theme br-none">
+                <div class="flex-center">
+                    <img src="../../assets/images/Interface/Add.svg" alt="">
+                    <span>ADD Role</span>
+                </div>
+            </button>
+        </a>
+    </section>
+
+    <dropdown-filter [filtersHandler]="{Status: false}" (onFilterChange)="onFiltersChange($event)"></dropdown-filter>
+
+    <div class="grid">
+
+         <div *ngFor="let role of roles">
+            <div class="flex-center">
+                <div class="f-bold f-14">{{role.roleName}}</div>
+                <div class="c-pointer"><img src="../../assets/images/edit.svg" alt="user_image"></div>
+            </div>
+            <ul class="role-details">
+                <li>
+                    <div>
+                        <img class="icon" src="../../assets/images/team_svgrepo.com.svg" alt="">
+                        <span>Department</span>
+                    </div>
+                    <div>{{role.department}}</div>
+                </li>
+                <li>
+                    <div>
+                        <img class="icon" src="../../assets/images/location-pin-alt-1_svgrepo.com.svg" alt="">
+                        <span>Location</span>
+                    </div>
+                    <div>{{role.location}}</div>
+                </li>
+                <li>
+                    <div><span>Total Employees</span></div>
+                    <div class="user-images">
+                        <!-- <img class="item-1" *ngFor="let image of getEmployeeImagesInRole(role, 4),let index as i" [src]="image" alt=""> -->
+                        <img class="item-1" src="../../assets/images/user5.png" alt="">
+                        <img class="item-2" src="../../assets/images/user2.png" alt="">
+                        <img class="item-3" src="../../assets/images/user3.png" alt="">
+                        <img class="item-4" src="../../assets/images/user4.png" alt="">
+                        <span class="item-5">+43</span>
+                    </div>
+                </li>
+                <li class="f-right" (click)="viewRoleDetails(role.id)">
+                    <span>View All Employees</span>
+                    <img src="../../assets/images/Vector.svg" alt="">
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>

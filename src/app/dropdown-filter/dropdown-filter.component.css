@@ -6,7 +6,8 @@
     color: var(--dark-red);
     background-color: rgb(250, 239, 239);
     display: flex;
-    justify-content: space-between;   
+    justify-content: space-between;
+    margin-bottom: 1rem;
 }
 .filter .dropdown{
     height: 35px;

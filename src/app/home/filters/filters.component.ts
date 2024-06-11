@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlphabetFilterComponent } from './alphabet-filter/alphabet-filter.component';
-import { DropdownFilterComponent } from './dropdown-filter/dropdown-filter.component';
+import { DropdownFilterComponent } from '../../dropdown-filter/dropdown-filter.component';
 import { FilterContent } from '../../Models/FilterContent';
 import { FilterService } from '../../Services/filter.service';
 
@@ -17,11 +17,6 @@ export class FiltersComponent {
   dropdownFilterValues: FilterContent = new FilterContent();
 
   constructor(private filterService: FilterService){ }
-
-  // @Output() filterChange: EventEmitter<{
-  //   alphabets: Set<string>,
-  //   dropdownFilters: FilterContent
-  // }> = new EventEmitter();
 
   alphabetFilterChange(selectedAlphabets: Set<string>){
     this.selectedAlphabets = selectedAlphabets;

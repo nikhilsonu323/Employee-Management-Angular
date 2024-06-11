@@ -6,7 +6,7 @@
         </div>
         <div class="flex">
             <div>
-                <button class="btn gray-btn">
+                <button class="btn gray-btn" (click)="downloadData()">
                     <div class="flex-center">
                         <img src="../../assets/images/Interface/Export.svg" alt="">
                         <span>EXPORT</span>
@@ -14,12 +14,14 @@
                 </button>
             </div>
             <div>
-                <button class="btn dark-red-theme br-none">
-                    <div class="flex-center">
-                        <img src="../../assets/images/Interface/Add.svg" alt="">
-                        <span>ADD EMPLOYEE</span>
-                    </div>
-                </button>
+                <a routerLink="add">
+                    <button class="btn dark-red-theme br-none">
+                        <div class="flex-center">
+                            <img src="../../assets/images/Interface/Add.svg" alt="">
+                            <span>ADD EMPLOYEE</span>
+                        </div>
+                    </button>
+                </a>
             </div>
         </div>
     </section>
