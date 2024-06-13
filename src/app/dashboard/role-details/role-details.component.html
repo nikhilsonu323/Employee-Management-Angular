@@ -1,0 +1,55 @@
+<div class="role-component">
+
+    <section class="description">
+        <div>
+            <div class="description-heading">Roles > Employees</div>
+            <div class="description-text">All the roles are configured here</div>
+        </div>
+        <a routerLink="/employees/add">
+            <button class="btn dark-red-theme br-none">
+                <div class="flex-center">
+                    <img src="assets/images/Interface/Add.svg" alt="">
+                    <span>ADD Employees</span>
+                </div>
+            </button>
+        </a>
+    </section>
+
+
+    <div class="grid">
+        <div class="employee" *ngFor="let employee of employees">
+            <div class="flex-center">
+                <div>
+                    <img class="details-user-icon" [src]="employee.imageData ?? defaultImage" alt="user_image">
+                </div>
+                <div>
+                    <div>{{employee.firstName+ ' ' + employee.lastName }}</div>
+                    <div>{{employee.role.roleName}}</div>
+                </div>
+            </div>
+            <ul class="details">
+                <li>
+                    <img src="assets/images/Vector (1).svg" alt="">
+                    <span>{{employee.empNo}}</span>
+                </li>
+                <li>
+                    <img src="assets/images/email-1_svgrepo.com.svg" alt="">
+                    <span>{{employee.email}}</span>
+                </li>
+                <li>
+                    <img src="assets/images/team_svgrepo.com.svg" alt="">
+                    <span>{{employee.role.department}}</span>
+                </li>
+                <li>
+                    <img src="assets/images/location-pin-alt-1_svgrepo.com.svg" alt="">
+                    <span>{{employee.location}}</span>
+                </li>
+                <li class="f-right" (click)="viewEmployee(employee.empNo)">
+                    <span>View</span>
+                    <img src="assets/images/Vector.svg" alt="">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

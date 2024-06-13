@@ -1,13 +1,2 @@
-<div class="app-container" [ngClass]="isNavbarMinimized? 'minimized' : ''">
-  <side-navbar (onMinimizeNavbarClicked)="toggleNavbar($event)"></side-navbar>
-  <div>
-    <search-bar></search-bar>
-    <!--For search bar , filters and employees data  -->
-    <router-outlet></router-outlet>
-    <!-- <app-home></app-home> -->
-  </div>
-  <p class="popupMsg" [ngClass]="toasterContent.isSuccess ? 'success' : 'failure'" 
-                    *ngIf="toasterContent !== null">
-                    {{toasterContent.message}}
-  </p>
-</div>
+<app-toaster *ngIf="toasterContent" [toasterContent]="toasterContent"></app-toaster>
+<router-outlet></router-outlet>
