@@ -30,14 +30,11 @@ export class LoginComponent implements OnInit{
   }
 
   constructor(private toasterService: ToasterService, private authService: AuthService, private router: Router){
-    console.log("Login constructor called");
-    
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       name: new FormControl(null,[Validators.required, Validators.pattern("^[a-zA-Z ]+$")]),
-      password: new FormControl(null, [Validators.required, Validators.min(8)])
+      password: new FormControl(null, [Validators.required])
     })
-    
   }
 
   ngOnInit(): void {
@@ -69,26 +66,22 @@ export class LoginComponent implements OnInit{
   }
 
   onFormSubmit(){
-    let authObs: Observable<AuthResponse>;
-    if(this.form.get('email')?.invalid && this.form.get('password')?.invalid && (this.isLoginMode || this.form.get('name')?.invalid)){
+    if(this.form.get('email')?.invalid || this.form.get('password')?.invalid || (!this.isLoginMode && this.form.get('name')?.invalid)){
       this.form.markAllAsTouched();
       return;
     }
+
     if(this.imageData == null && !this.isLoginMode){
       this.toasterService.showToasterMessage('Profile is required', false);
       return;
     }
+    let authObs: Observable<AuthResponse>;
     if(this.isLoginMode){
       let user = this.createLoginUser();
-      
-      //Handle Login and redirect to employees
       authObs = this.authService.login(user);
     }
-    
     else{
       let user = this.createSignUpUser();
-      
-      //Handle Sign Up and redirect to employees
       authObs = this.authService.signup(user);
     }
     authObs.subscribe({
@@ -96,13 +89,14 @@ export class LoginComponent implements OnInit{
     });
   }
 
-  createLoginUser(): LoginUser{
+  private createLoginUser(): LoginUser{
     return {
       email: this.form.get('email')!.value, 
       password: this.form.get('password')!.value
     }
   }
-  createSignUpUser(): RegisterUser{
+  
+  private createSignUpUser(): RegisterUser{
     return {
       email: this.form.get('email')!.value, 
       password: this.form.get('password')!.value,

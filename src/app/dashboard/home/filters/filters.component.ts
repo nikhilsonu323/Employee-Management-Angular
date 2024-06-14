@@ -28,7 +28,7 @@ export class FiltersComponent {
     this.emitFilters();
   }
 
-  emitFilters() {
+  private emitFilters() {
     this.filterService.onFilterChange({
       alphabets: this.selectedAlphabets,
       dropdownFilters: this.dropdownFilterValues

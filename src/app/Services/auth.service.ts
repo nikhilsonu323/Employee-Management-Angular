@@ -74,14 +74,16 @@ export class AuthService {
   }
 
   private handleCreateUser(response: AuthResponse){
+
     let expiresInMS = new Date().getTime() + (response.expiresIn * 1000);
     let expiresInDate = new Date(expiresInMS);
+
     this.user = new User(response.name, response.email, response.imageData, response.token, expiresInDate);
+    this.autoLogout(response.expiresIn * 1000);
 
     localStorage.setItem("user", JSON.stringify(this.user));
     
     this.router.navigate(['employees']);
 
-    this.autoLogout(expiresInMS);
   }
 }

@@ -77,3 +77,6 @@ img{
 .f-right:hover{
     color: var(--dark-red);
 }
+.f-right:hover path{
+    fill: var(--dark-red);
+}

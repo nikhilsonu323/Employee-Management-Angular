@@ -47,6 +47,10 @@ export class ApiService {
     return this.http.get<Role[]>(this.rolesUrl);
   }
 
+  getRoleById(id: number){
+    return this.http.get<Role | null>(this.rolesUrl +"/" + id);
+  }
+
   getRolesWithEmployees(){
     return this.http.get<Role[]>(this.rolesUrl+'/employees');
   }

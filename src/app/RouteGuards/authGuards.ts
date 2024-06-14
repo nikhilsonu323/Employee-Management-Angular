@@ -3,11 +3,9 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from "@angular/ro
 import { AuthService } from "../Services/auth.service";
 
  
-export const authGuard = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const authGuard = () => {
     const router = inject(Router);
     const authService = inject(AuthService);
-    console.log(authService.user);
-    
 
     if(authService.user){
         return true;

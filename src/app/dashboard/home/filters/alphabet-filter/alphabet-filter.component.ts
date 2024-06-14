@@ -21,6 +21,7 @@ export class AlphabetFilterComponent {
       this.selectedAlphabets.add(alphabet);
     this.onFilterChange.emit(this.selectedAlphabets);
   }
+  
   clearSelectedAlphabets(){
     this.selectedAlphabets.clear();
     this.onFilterChange.emit(this.selectedAlphabets);
