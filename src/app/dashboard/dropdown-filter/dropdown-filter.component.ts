@@ -2,6 +2,7 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Output, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { FilterContent } from '../../Models/FilterContent';
 import { FilterApiService } from '../../Services/filter-api.service';
+import { FilterHandler, FilterOptions, OptionDisplayHandler } from '../../Models/DropdownFilterModels';
 
 @Component({
   selector: 'dropdown-filter',
@@ -42,21 +43,6 @@ export class DropdownFilterComponent implements OnInit{
     })
   }
 
-  handleClickOutside(event: Event) {
-    if (event.target !== this.statusDropdown?.nativeElement && !this.statusDropdown?.nativeElement.contains(event.target as Node)) {
-      this.toDisplayFilterOptions.Status = false;
-    }
-    
-    if (event.target !== this.locationDropdown?.nativeElement && !this.locationDropdown?.nativeElement.contains(event.target as Node)) {
-      this.toDisplayFilterOptions.Location = false;
-    }
-    
-    if (event.target !== this.departmentDropdown?.nativeElement && !this.departmentDropdown?.nativeElement.contains(event.target as Node)) {
-      this.toDisplayFilterOptions.Department = false;
-    }
-  }
-
-
   onOptionClick(set: Set<number>, value: number){
     if(set.has(value)){
       set.delete(value);
@@ -74,31 +60,21 @@ export class DropdownFilterComponent implements OnInit{
   apply(){
     this.onFilterChange.emit(this.selectedFilters);
   }
+
+  private handleClickOutside(event: Event) {
+    if (event.target !== this.statusDropdown?.nativeElement && !this.statusDropdown?.nativeElement.contains(event.target as Node)) {
+      this.toDisplayFilterOptions.Status = false;
+    }
+    
+    if (event.target !== this.locationDropdown?.nativeElement && !this.locationDropdown?.nativeElement.contains(event.target as Node)) {
+      this.toDisplayFilterOptions.Location = false;
+    }
+    
+    if (event.target !== this.departmentDropdown?.nativeElement && !this.departmentDropdown?.nativeElement.contains(event.target as Node)) {
+      this.toDisplayFilterOptions.Department = false;
+    }
+  }
+  
 }
 
 
-
-class OptionDisplayHandler{
-  Status: boolean = false;
-  Location: boolean = false;
-  Department: boolean = false;
-}
-
-class FilterHandler{
-  Status?: boolean;
-  Location?: boolean;
-  Department?: boolean;
-}
-
-
-class FilterOptions{
-  status: {
-    id: number,
-    statusType: string}[] = [];
-  departments: {
-    id: number,
-    name: string}[] = [];
-  location: {
-    id: number,
-    city: string}[] = [];
-}

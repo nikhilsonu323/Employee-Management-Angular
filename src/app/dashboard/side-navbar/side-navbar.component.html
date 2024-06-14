@@ -23,7 +23,9 @@
                 <img [src]="role.classList.contains('active-route')?'assets/images/Horizontal nav/Roles.svg':'assets/images/Horizontal nav/Roles-black.svg'" alt="lock">
                 <span *ngIf="!isNavbarMinimized">Roles</span>
             </div>
-            <div class="caret" *ngIf="!isNavbarMinimized"><img src="assets/images/svg/arrow_forward_ios.svg" alt=""></div>
+            <div class="caret" *ngIf="!isNavbarMinimized">
+                <img [src]="role.classList.contains('active-route')?'assets/images/svg/arrow_forward_red.svg':'assets/images/svg/arrow_forward_ios.svg'" alt="lock">
+            </div>
         </a>
         <div class="nav-items flex-justify-sb">
             <div class="flex-gap-1r">

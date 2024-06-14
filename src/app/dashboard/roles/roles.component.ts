@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf, NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Role } from '../../Models/Role';
 import { DropdownFilterComponent } from '../dropdown-filter/dropdown-filter.component';
@@ -10,18 +10,20 @@ import { RoleDetailsComponent } from '../role-details/role-details.component';
 @Component({
   selector: 'app-roles',
   standalone: true,
-  imports: [NgFor, DropdownFilterComponent, RouterLink, RoleDetailsComponent],
+  imports: [NgFor, NgIf, NgStyle,DropdownFilterComponent, RouterLink, RoleDetailsComponent],
   templateUrl: './roles.component.html',
   styleUrl: './roles.component.css'
 })
 export class RolesComponent implements OnInit{
   roles: Role[] = [];
+  displayedImages: { [roleId: string]: string[] } = {};
 
   constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.apiService.getRolesWithEmployees().subscribe(data =>{
       this.roles = data;
+      this.getEmployeeImagesInRole(4);
     });
   }
 
@@ -35,18 +37,28 @@ export class RolesComponent implements OnInit{
     this.router.navigate(["roles",id,"employees"]);
   }
 
-  
-  getEmployeeImagesInRole(role: Role, count: number){
-    let images: string[] = [];
-    let i = 0;
-    if(!role.employees) return [];
-    while(count > 0 && i < role.employees.length){
-      if(role.employees[i].imageData != null){
-        count -= 1;
-        images.push(role.employees[i].imageData!);
+  editRole(role: Role){
+    this.router.navigate(['roles','edit',role.id]);
+  }
+
+  private getEmployeeImagesInRole(imagesCount: number){
+    let defaultImage = "assets/images/user3.png";
+    this.roles.forEach(role => {
+      let images: string[] = [];
+      let count = 0;
+      this.displayedImages[role.id] = images;
+      let i = 0;
+      if(!role.employees) return;
+      while(count < imagesCount && i < role.employees.length){
+        if(role.employees[i].imageData != null){
+          count += 1;
+          images.push(role.employees[i].imageData!);
+        }
+        i+=1;
       }
-      i+=1;
-    }
-    return images;
+      this.displayedImages[role.id] = Array(Math.min(role.employees.length, imagesCount) - count).fill(defaultImage).concat(images);
+    })
+    console.log(this.displayedImages);
   }
 }
+

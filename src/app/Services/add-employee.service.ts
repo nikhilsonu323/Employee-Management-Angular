@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Role } from '../Models/Role';
 import { Department, Location, Manager, Project, Status } from '../Models/AddEmployeeOptions';
 import { AddEmployee } from '../Models/AddEmployee';
@@ -32,7 +32,7 @@ export class AddEmployeeAndRoleService {
     return this.http.get<Role[]>(this.url+'Roles/department/' + DepartmentId);
   }
 
-  getManagers(empno: string | null){
+  getManagers(){
     return this.http.get<Manager[]>(this.url+'Employees/managers');
   }
 
@@ -54,7 +54,14 @@ export class AddEmployeeAndRoleService {
     return this.http.post(this.url+'Roles', role);
   }
 
-  uploadImage(image: FormData){
-    return this.http.post(this.url+'Employees/image',image);
+  editRole(role: {
+    roleName: string,
+    departmentId: string,
+    locationId: string,
+    description: string | null,
+    employeeIds: string[]
+  }, id: number){
+    return this.http.put(this.url+'Roles/'+id, role);
   }
+
 }

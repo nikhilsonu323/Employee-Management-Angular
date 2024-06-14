@@ -12,13 +12,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class SideNavbarComponent {
   @Output() onMinimizeNavbarClicked: EventEmitter<boolean> = new EventEmitter();
   isNavbarMinimized: boolean = false;
+
   toggleNavbar(){
     this.onMinimizeNavbarClicked.emit(!this.isNavbarMinimized);
     if(this.isNavbarMinimized)
-      setTimeout(()=>{this.isNavbarMinimized = !this.isNavbarMinimized;},300);
+      setTimeout(()=>{ this.isNavbarMinimized = !this.isNavbarMinimized },300);
     else
-      setTimeout(()=>{this.isNavbarMinimized = !this.isNavbarMinimized;},150);
-      // this.isNavbarMinimized = !this.isNavbarMinimized;
+      setTimeout(()=>{ this.isNavbarMinimized = !this.isNavbarMinimized },150);
   }
 
 }

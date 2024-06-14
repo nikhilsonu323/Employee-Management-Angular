@@ -21,6 +21,10 @@
     margin-top: 8px;
 }
 
+.c-pointer{
+    cursor: pointer;
+}
+
 .btn{
     height: 2.5rem;
     padding: 0 25px;
@@ -55,39 +59,37 @@ li{
     margin-right: 5px;
     transform: translate(0,3px);
 }
-.user-images img,.item-5{
+
+.images{
+    display: flex;
+}
+.images img,.images span{
     width: 30px;
     border: 1px solid white;
     user-select: none;
     border-radius: 100%;
 }
-.item-1{
-    transform: translate(280%,0);
+.images img{
+    position: relative;
 }
-.item-2{
-    transform: translate(210%,0);
-}
-.item-3{
-    transform: translate(140%,0);
-}
-.item-4{
-    transform: translate(70%,0);
-}
-.item-5{
-    display: inline-block;
-    text-align: center;
-    padding: 5px;
+.images span{
     height: 30px;
-    background-color: rgb(246, 247, 249);
-    font-size: 10px;
-    transform: translate(0,-40%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    background-color: lightgray;
 }
+
 
 .f-right{
     float: right;
     cursor: pointer;
     user-select: none;
 }
-.f-right :hover{
+.f-right:hover{
     color: var(--dark-red) !important;
+}
+.f-right:hover path{
+    fill: var(--dark-red);
 }

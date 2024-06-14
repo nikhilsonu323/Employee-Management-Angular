@@ -30,6 +30,7 @@
                 <input type="password" id="password" formControlName='password'>
                 <ng-container *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
                     <img src="assets/images/alert.png" class="alert-img" alt="">
+                    {{form.get('password')?.errors?.['requiredLength']}}
                     <span class="error" *ngIf="form.get('password')?.errors?.['required']">{{errorMessages.required}}</span>
                     <span class="error" *ngIf="form.get('password')?.errors?.['pattern']">{{errorMessages.password}}</span>
                 </ng-container>

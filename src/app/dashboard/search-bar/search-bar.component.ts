@@ -24,21 +24,19 @@ export class SearchBarComponent implements OnInit {
     this.user = this.authService.user;
   }
 
-  handleClickOutside(event: Event) {
+  toggle(){    
+    this.showLogout = !this.showLogout;
+  }
+
+  logout(){
+    this.authService.logout();
+  }
+
+  private handleClickOutside(event: Event) {
     if (event.target !== this.logoutContainer?.nativeElement && !this.logoutContainer?.nativeElement.contains(event.target as Node) &&
         event.target !== this.userDetails.nativeElement && !this.userDetails.nativeElement.contains(event.target as Node)) {
       this.showLogout = false;
     }
   }
 
-  toggle(){    
-    this.showLogout = !this.showLogout;
-    console.log(this.showLogout);
-
-  }
-
-
-  logout(){
-    this.authService.logout();
-  }
 }

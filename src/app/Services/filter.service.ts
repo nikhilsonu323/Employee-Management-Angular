@@ -6,8 +6,6 @@ import { FilterContent } from '../Models/FilterContent';
 })
 export class FilterService {
 
-  filters : FilterData | undefined;
-
   @Output() filterChange: EventEmitter<{
     alphabets: Set<string>,
     dropdownFilters: FilterContent
@@ -17,18 +15,15 @@ export class FilterService {
 
   constructor() { }
 
-  onFilterChange(data: FilterData){
-    this.filters = data;
-    this.filterChange.emit(this.filters);
+  onFilterChange(data: {
+    alphabets: Set<string>,
+    dropdownFilters: FilterContent
+  }){
+    this.filterChange.emit(data);
   }
 
   downloadData(){
     this.onExportClick.emit();
   }
 
-}
-
-interface FilterData{
-  alphabets: Set<string>,
-  dropdownFilters: FilterContent
 }

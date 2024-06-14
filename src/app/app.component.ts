@@ -20,7 +20,7 @@ export class AppComponent implements OnInit{
     isSuccess: boolean,
     displayTime: number
   } | null = null;
-  
+
   ngOnInit() {
     this.authService.autoLogin();
     

@@ -15,55 +15,19 @@
                 <tr>
                     <th> <input type="checkbox" [checked]="isSelectAllCheckboxChecked" (input)="onSelectAllCheckBoxChange($event)"> </th>
 
-                    <th (click)="sort(columnNames.Name)">  
+                    <th (click)="sort(column.columnType)" *ngFor="let column of tableColumns">  
                         <div>
-                            <span>USER</span>
+                            <span>{{column.name}}</span>
                             <img src="assets/images/svg/expand_all.svg" alt="sort">
                         </div>
                     </th>
-                    <th (click)="sort(columnNames.Location)">
-                        <div>
-                            <span>LOCATION</span>
-                            <img src="assets/images/svg/expand_all.svg" alt="sort">
-                        </div>    
-                    </th>
-                    <th (click)="sort(columnNames.Department)">
-                        <div>
-                            <span>DEPARTMENT</span>
-                            <img src="assets/images/svg/expand_all.svg" alt="sort">
-                        </div>
-                    </th>
-                    <th (click)="sort(columnNames.Role)">
-                        <div>
-                            <span>ROLE</span>
-                            <img src="assets/images/svg/expand_all.svg" alt="sort">
-                        </div>
-                    </th>
-                    <th (click)="sort(columnNames.EmpNo)">
-                        <div>
-                            <span>EMP NO</span>
-                            <img src="assets/images/svg/expand_all.svg" alt="sort">
-                        </div>
-                    </th>
-                    <th (click)="sort(columnNames.Status)">
-                        <div>
-                            <span>STATUS</span>
-                            <img src="assets/images/svg/expand_all.svg" alt="sort">
-                        </div>
-                    </th>
-                    <th (click)="sort(columnNames.JoiningDate)">
-                        <div>
-                            <span>JOIN DT</span>
-                            <img src="assets/images/svg/expand_all.svg" alt="sort">
-                        </div>
-                    </th>
+  
                     <th class="f-30 rel">
                         <img src="assets/images/svg/three_dots.svg" alt="sort">
                     </th>
                 </tr>
             </thead>
             <tbody>
-
 
                 <tr *ngFor="let emp of employeesData">
                     <td ><input type="checkbox" (input)="onCheckBoxClick(emp.empNo)" [checked]="selectedEmployees.has(emp.empNo) "></td>

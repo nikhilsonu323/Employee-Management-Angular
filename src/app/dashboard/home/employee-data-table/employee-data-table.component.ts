@@ -4,6 +4,7 @@ import { ApiService } from '../../../Services/api.service';
 import { Employee } from '../../../Models/Employee';
 import { FilterService } from '../../../Services/filter.service';
 import { Router } from '@angular/router';
+import { Columns } from '../../../Models/Enums';
 
 @Component({
   selector: 'data-table',
@@ -14,13 +15,23 @@ import { Router } from '@angular/router';
 })
 export class EmployeeDataTableComponent implements OnInit{
   
-  columnNames = Columns
+  columnNames = Columns;
   sortedColumn: Columns | null = null; 
   employeesData: Employee[] = []; 
   isSelectAllCheckboxChecked:  boolean = false;
   selectedEmployees: Set<string> = new Set();
   selectedEllipsis: string = '';
   defaultImage = "assets/images/user3.png";
+
+  tableColumns =[
+    {name: 'USER', columnType: Columns.Name},
+    {name: 'LOCATION', columnType: Columns.Location},
+    {name: 'DEPARTMENT', columnType: Columns.Department},
+    {name: 'ROLE', columnType: Columns.Role},
+    {name: 'EMP NO', columnType: Columns.EmpNo},
+    {name: 'STATUS', columnType: Columns.Status},
+    {name: 'JOIN DT', columnType: Columns.JoiningDate},
+  ]
   
   constructor(private apiService: ApiService, private filterService: FilterService,private router: Router){ }
 
@@ -44,32 +55,6 @@ export class EmployeeDataTableComponent implements OnInit{
     this.filterService.onExportClick.subscribe(()=>{
       this.downloadData()
     })
-  }
-
-
-  downloadData() {
-    if(this.employeesData.length == 0) return;
-    let csvData: string[] = [];
-    let csvRow: any[] = [];
-    // Object.keys(this.employeesData).forEach(key => csvRow.push(key));
-    csvRow =['Employee Number','Name', 'Email', 'Location', 'Department', 'RoleName', 'Status', 'Joining Date', 'Date of birth'];
-    csvData.push(csvRow.join(','));
-    console.log(csvRow);
-    
-    this.employeesData.forEach(emp =>{
-      // Object.keys(emp).forEach(key => csvRow.push(emp[key]));
-      csvRow = [emp.empNo, emp.firstName+' '+emp.lastName, emp.email, emp.location, emp.role.department, emp.role.roleName, emp.status, emp.joiningDate, emp.dateOfBirth]
-      csvData.push(csvRow.join(','));
-    });
-
-    let link = document.createElement("a");
-    link.download = "Employees";
-    let blob = new Blob([csvData.join("\n")], { type: "text/csv" });
-    link.href = URL.createObjectURL(blob);
-    link.click();
-    link.remove();
-
-    URL.revokeObjectURL(link.href);
   }
 
   sort(columnName: Columns){
@@ -166,12 +151,32 @@ export class EmployeeDataTableComponent implements OnInit{
         this.selectedEllipsis = '';
       })
   }
+  
+  private downloadData() {
+    if(this.employeesData.length == 0) return;
+    let csvData: string[] = [];
+    let csvRow: any[] = [];
+    // Object.keys(this.employeesData).forEach(key => csvRow.push(key));
+    csvRow =['Employee Number','Name', 'Email', 'Location', 'Department', 'RoleName', 'Status', 'Joining Date', 'Date of birth'];
+    csvData.push(csvRow.join(','));
+    console.log(csvRow);
+    
+    this.employeesData.forEach(emp =>{
+      // Object.keys(emp).forEach(key => csvRow.push(emp[key]));
+      csvRow = [emp.empNo, emp.firstName+' '+emp.lastName, emp.email, emp.location, emp.role.department, emp.role.roleName, emp.status, emp.joiningDate, emp.dateOfBirth]
+      csvData.push(csvRow.join(','));
+    });
+
+    let link = document.createElement("a");
+    link.download = "Employees";
+    let blob = new Blob([csvData.join("\n")], { type: "text/csv" });
+    link.href = URL.createObjectURL(blob);
+    link.click();
+    link.remove();
+
+    URL.revokeObjectURL(link.href);
+  }
+
 }
-
-
-enum Columns{
-  Name, Location, Department, Role, EmpNo, Status, JoiningDate
-}
-
 
 

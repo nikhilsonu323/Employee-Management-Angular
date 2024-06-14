@@ -23,9 +23,3 @@ export interface Project{
     id: number, 
     name: string
 }
-
-export enum EmployeeFormModes{
-    AddEmployee,
-    EditEmployee,
-    ViewEmployee
-}
