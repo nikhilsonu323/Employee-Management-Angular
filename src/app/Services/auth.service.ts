@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private url = 'https://localhost:7260/api/Auth';
+  private url = 'https://localhost:7260 /api/Auth';
   user: User | null = null;
   logoutTimer: any;
 

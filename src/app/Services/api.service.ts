@@ -10,8 +10,8 @@ import { Role } from '../Models/Role';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  private url = 'https://localhost:7260/api/Employees';
-  private rolesUrl = 'https://localhost:7260/api/Roles';
+  private url = 'https://localhost:7260 /api/Employees';
+  private rolesUrl = 'https://localhost:7260 /api/Roles';
   
   getEmployees(){
     return this.http.get<Employee[]>(this.url);
