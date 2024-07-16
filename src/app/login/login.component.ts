@@ -85,7 +85,11 @@ export class LoginComponent implements OnInit{
       authObs = this.authService.signup(user);
     }
     authObs.subscribe({
-      error: (err) => this.toasterService.showToasterMessage(err, false)
+      error: (err) => {
+        this.toasterService.showToasterMessage(err, false)
+        console.log(err);
+        
+      }
     });
   }
 

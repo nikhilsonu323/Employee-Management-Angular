@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Employee } from '../Models/Employee';
 import { FilterContent } from '../Models/FilterContent';
 import { Role } from '../Models/Role';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -10,15 +11,15 @@ import { Role } from '../Models/Role';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  private url = 'https://localhost:7260 /api/Employees';
-  private rolesUrl = 'https://localhost:7260 /api/Roles';
+  private employeesUrl = environment.employeesUrl;
+  private rolesUrl = environment.rolesUrl;
   
   getEmployees(){
-    return this.http.get<Employee[]>(this.url);
+    return this.http.get<Employee[]>(this.employeesUrl);
   }
 
   getEmployeeById(id: string){
-    return this.http.get<Employee | null>(this.url+'/'+id);
+    return this.http.get<Employee | null>(this.employeesUrl+'/'+id);
   }
 
   getFilteredEmployee(filters: FilterData){
@@ -28,19 +29,19 @@ export class ApiService {
       locationIds: Array.from(filters.dropdownFilters.location),
       departmentIds: Array.from(filters.dropdownFilters.departments)
     };
-    return this.http.post<Employee[]>(this.url+'/filter', filterData);
+    return this.http.post<Employee[]>(this.employeesUrl+'/filter', filterData);
   }
 
   getEmployeesInRole(id: number){
-    return this.http.get<Employee[]>(this.url+'/role/'+id);
+    return this.http.get<Employee[]>(this.employeesUrl+'/role/'+id);
   }
 
   deleteEmployees(empNos: Set<string>){
-    return this.http.delete<string[]>(this.url,{body: Array.from(empNos)});
+    return this.http.delete<string[]>(this.employeesUrl,{body: Array.from(empNos)});
   }
 
   deleteEmployee(empNo: string){
-    return this.http.delete(this.url + '/'+ empNo);
+    return this.http.delete(this.employeesUrl + '/'+ empNo);
   }
 
   getRoles(){

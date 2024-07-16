@@ -21,7 +21,6 @@ export const routes: Routes = [
         { path:'roles/:id/employees', component: RoleDetailsComponent},
         { path:'roles/add', component: AddRoleComponent, data: {mode: FormModes.Add}},
         { path:'roles/edit/:id', component: AddRoleComponent, data: {mode: FormModes.Edit}},
-        // { path: '**', redirectTo: 'employee' }
         ]
     },
 ];

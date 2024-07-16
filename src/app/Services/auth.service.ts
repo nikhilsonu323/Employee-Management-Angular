@@ -5,13 +5,14 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { AuthResponse } from '../Models/AuthResponse';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private url = 'https://localhost:7260 /api/Auth';
+  private url = environment.authUrl;
   user: User | null = null;
   logoutTimer: any;
 
@@ -50,7 +51,7 @@ export class AuthService {
       return;
     }
     let user = JSON.parse(storedUser);
-    
+
     this.user = new User(user.name, user.email, user.imageData, user._token, user._expiresIn);
 
     let expiresInMs = new Date(user._expiresIn).getTime() - new Date().getTime(); 
@@ -58,6 +59,7 @@ export class AuthService {
   }
 
   private handleError(err: any){
+    
     let errorMessage = 'An Unkonwn error Has occured';
     if(!err.error || !err.error.error){
       return throwError(() => errorMessage);
