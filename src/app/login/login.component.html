@@ -1,6 +1,6 @@
 <div class="login-container">
     <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
-        <h1 class="heading">{{isLoginMode ? 'Login' : 'Register(changed to pudh to github)'}}</h1>
+        <h1 class="heading">{{isLoginMode ? 'Login' : 'Register'}}</h1>
         <ul>
             <li *ngIf="!isLoginMode" class="profile">
                 <img [src]="imageData ?? defaultImage" alt="">
