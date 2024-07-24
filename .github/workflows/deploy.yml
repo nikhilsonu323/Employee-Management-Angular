@@ -29,5 +29,6 @@ jobs:
 
     - name: Deploy to GitHub Pages
       env:
+        CI: true
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: npx angular-cli-ghpages --dir=docs/browser
