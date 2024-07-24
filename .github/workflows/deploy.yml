@@ -1,7 +1,6 @@
 name: Deploy Angular to GitHub Pages
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - develop
@@ -23,9 +22,9 @@ jobs:
       run: npm install
 
     - name: Build the Angular app
-      run: npm run build --configuration=production --base-href='/' --output-path='docs'
+      run: ng build --configuration=production --base-href /Employee-Management-Angular/ --output-path docs
 
     - name: Deploy to GitHub Pages
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: npx angular-cli-ghpages --dir=docs
+      run: npx angular-cli-ghpages --dir=docs/browser
