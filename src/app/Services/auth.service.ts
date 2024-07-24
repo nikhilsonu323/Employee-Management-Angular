@@ -59,7 +59,6 @@ export class AuthService {
   }
 
   private handleError(err: any){
-    
     let errorMessage = 'An Unkonwn error Has occured';
     if(!err.error || !err.error.error){
       return throwError(() => errorMessage);
