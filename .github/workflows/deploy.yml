@@ -27,6 +27,11 @@ jobs:
     - name: Build the Angular app
       run: ng build --configuration=production --base-href /Employee-Management-Angular/ --output-path docs
 
+    - name: Configure Git
+      run: |
+        git config --global user.email "nikhilsonu323@gmail.com"
+        git config --global user.name "nikhil"
+
     - name: Deploy to GitHub Pages
       env:
         CI: true
